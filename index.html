@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Playwrite GB S;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            overflow-x: hidden;
+        }
+        .header {
+            text-align: center;
+            padding: 1em;
+            background: #333;
+            color: white;
+            animation: slideInFromTop 1s ease-out;
+        }
+        .section {
+            padding: 2em;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .about {
+            text-align: center;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .education-list, .language-list, .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        .education-item, .language-item, .skill-item{
+            background: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(33% - 1em);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: itemFadeIn 0.8s ease-out forwards;
+        }
+        .education-item h3, .language-item h3, .skill-item h3  {
+            margin: 0 0 0.5em;
+        }
+        .contact {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 1em;
+        }
+
+        /* Animations */
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes itemFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Animation */
+        .education-item:hover, .language-item:hover,.skill-item:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+        h1{
+            font-size:40px;
+        }
+        h2{
+            font-size:50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>My Portfolio</h1>
+        <p>Welcome to my portfolio! </p>
+    </div>
+    <div class="section about">
+        <h2>About Me</h2>
+        <p>Hola! I’m Ananya Paliwal, a passionate software developer with a love for creating dynamic and engaging websites and applications. 
+        I have a strong foundation in HTML, CSS, and JavaScript, and I’m constantly learning new technologies to expand my skillset. 
+        When I’m not coding, you can find me exploring new programming challenges or diving into the latest tech trends!</p>
+    </div>
+
+
+    <div class="section" id="education-section">
+        <h2>Education</h2>
+        <div class="education-list" id="education">
+            <!-- Dynamic education items will load here -->
+        </div>
+    </div>
+
+    <div class="section" id="languages-section">
+        <h2>Languages</h2>
+        <div class="language-list" id="languages">
+            <!-- Dynamic language items will load here -->
+        </div>
+    </div>
+     <div class="section" id="skills-section">
+        <h2>Skills</h2>
+        <div class="skills-list" id="skills">
+            <!-- Dynamic skill items will load here -->
+        </div>
+    </div>
+
+
+    <div class="contact">
+        <p>Contact me at <a href="mailto:ananya.paliwal2508@gmail.com" style="color: #ffd700;">ananya.paliwal2508@gmail.com</a></p>
+    </div>
+
+    <script>
+        const education = [
+            {
+                title: "Bachelor of Technology in Information Technology",
+                institution: "Maharaja Surajmal Institute of Technology",
+                
+               
+            },
+            {
+                title: "High School Diploma",
+                institution: "Bharti Public School",
+                description: "10th: 93.6%      12th: 92%(best 4 sub) ",
+               
+            }
+        ];
+
+        const languages = [
+            {
+                name: "English",
+                proficiency: "Fluent"
+            },
+            {
+                name: "Spanish",
+                proficiency: "Beginner"
+            },
+            {
+                name: "Hindi",
+                proficiency: "Fluent"
+            }
+        ];
+        const skills = [
+            { name: "HTML", level: "Intermediate" },
+            { name: "CSS", level: "Intermediate" },
+            { name: "JavaScript", level: "Beginner" },
+            { name: "Python", level: "Intermediate" },
+            { name: "C {programming language}", level: "Beginner" }
+        ];
+
+        const educationContainer = document.getElementById('education');
+        const languagesContainer = document.getElementById('languages');
+        const skillsContainer = document.getElementById('skills');
+
+        // Load education items
+        education.forEach((item, index) => {
+            const educationDiv = document.createElement('div');
+            educationDiv.classList.add('education-item');
+            educationDiv.style.animationDelay = `${0.2 * index}s`; /* Delay for staggered effect */
+
+            educationDiv.innerHTML = `
+                <h3>${item.title}</h3>
+                <p><strong>Institution:</strong> ${item.institution}</p>
+                <p>${item.description}</p>
+                <a href="${item.link}" target="_blank">Learn More</a>
+            `;
+
+            educationContainer.appendChild(educationDiv);
+        });
+
+        // Load language items
+        languages.forEach((language, index) => {
+            const languageDiv = document.createElement('div');
+            languageDiv.classList.add('language-item');
+            languageDiv.style.animationDelay = `${0.2 * index}s`; /* Delay for staggered effect */
+
+            languageDiv.innerHTML = `
+                <h3>${language.name}</h3>
+                <p>Proficiency: ${language.proficiency}</p>
+            `;
+
+            languagesContainer.appendChild(languageDiv);
+        });
+        skills.forEach((skill, index) => {
+            const skillDiv = document.createElement('div');
+            skillDiv.classList.add('skill-item');
+            skillDiv.style.animationDelay = `${0.2 * index}s`;
+
+            skillDiv.innerHTML = `
+                <h3>${skill.name}</h3>
+                <p>Level: ${skill.level}</p>
+            `;
+
+            skillsContainer.appendChild(skillDiv);
+        });
+    </script>
+</body>
+</html>
